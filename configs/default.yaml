@@ -79,7 +79,7 @@ trainer:
   accumulate_grad_batches: 1
 
   # Precision https://lightning.ai/docs/pytorch/stable/common/trainer.html#precision
-  precision: 32-true
+  precision: 'bf16-mixed'
 
   # Plugins https://lightning.ai/docs/pytorch/stable/common/trainer.html#plugins
   plugins: null
