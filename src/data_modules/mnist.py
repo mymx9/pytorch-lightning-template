@@ -1,5 +1,5 @@
 # Adapted from: https://github.com/ashleve/lightning-hydra-template/blob/main/src/data/mnist_datamodule.py
-from typing import Any
+from typing import Any, Tuple
 
 import pytorch_lightning as pl
 from torch.utils.data import ConcatDataset, DataLoader, Dataset, random_split
@@ -97,6 +97,15 @@ class MNISTDataModule(pl.LightningDataModule):
         )
 
     def test_dataloader(self):
+        return DataLoader(
+            dataset=self.data_test,
+            batch_size=self.hparams.batch_size,
+            num_workers=self.hparams.num_workers,
+            pin_memory=self.hparams.pin_memory,
+            shuffle=False,
+        )
+
+    def predict_dataloader(self):
         return DataLoader(
             dataset=self.data_test,
             batch_size=self.hparams.batch_size,

@@ -124,6 +124,12 @@ class SimpleNetModule(pl.LightningModule):
     def on_test_epoch_end(self):
         pass
 
+    def predict_step(self, batch: Any, batch_idx: int):
+        x, y = batch
+        logits = self.forward(x)
+        preds = torch.argmax(logits, dim=1)
+        return preds
+
 
 if __name__ == "__main__":
     m = SimpleNetModule()

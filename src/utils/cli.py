@@ -71,8 +71,8 @@ class WandbSaveConfigCallback(SaveConfigCallback):
 class CustomLightningCLI(LightningCLI):
     def __init__(
         self,
-        save_config_callback: Optional[Type[SaveConfigCallback]] = WandbSaveConfigCallback,
-        parser_kwargs: Optional[Dict[str, Any]] = None,
+        save_config_callback: type[SaveConfigCallback] | None = WandbSaveConfigCallback,
+        parser_kwargs: dict[str, Any] | None = None,
         **kwargs: Any,
     ) -> None:
         new_parser_kwargs = {
@@ -121,7 +121,7 @@ class CustomLightningCLI(LightningCLI):
             tested_ckpt_path = None
         self.config_init[self.config_init["subcommand"]]["ckpt_path"] = tested_ckpt_path
 
-    def _prepare_subcommand_kwargs(self, subcommand: str) -> Dict[str, Any]:
+    def _prepare_subcommand_kwargs(self, subcommand: str) -> dict[str, Any]:
         """Prepares the keyword arguments to pass to the subcommand to run."""
         fn_kwargs = {
             k: v
@@ -135,7 +135,7 @@ class CustomLightningCLI(LightningCLI):
 
     @staticmethod
     def configure_optimizers(
-        lightning_module: LightningModule, optimizer: Optimizer, lr_scheduler: Optional[LRSchedulerTypeUnion] = None
+        lightning_module: LightningModule, optimizer: Optimizer, lr_scheduler: LRSchedulerTypeUnion | None = None
     ) -> Any:
         """Override to customize the :meth:`~pytorch_lightning.core.LightningModule.configure_optimizers` method.
 
