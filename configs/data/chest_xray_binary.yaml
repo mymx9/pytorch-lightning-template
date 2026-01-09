@@ -1,0 +1,10 @@
+data:
+  class_path: data_modules.ChestXRayBinaryDataModule
+  init_args:
+    data_dir: /root/autodl-fs/data/chest_xray
+    train_val_split: 0.2
+    batch_size: 64
+    num_workers: 4
+    pin_memory: true
+    image_size: 224
+    balance: true
